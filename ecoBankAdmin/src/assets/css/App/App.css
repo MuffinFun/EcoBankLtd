@@ -1,0 +1,26 @@
+#root {
+  padding: 1em 2em 0.5em 2em;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1.22fr 1.2fr 1.1fr;
+  grid-template-rows: 0.17fr 1fr;
+  grid-column-gap: 30px;
+  grid-row-gap: 50px;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  border: 1.5px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

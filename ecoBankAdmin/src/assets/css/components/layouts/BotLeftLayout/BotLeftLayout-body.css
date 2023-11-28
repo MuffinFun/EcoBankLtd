@@ -1,0 +1,9 @@
+.table-body {
+  width: 100%;
+}
+
+.table-body__body-line {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 25px;
+}

@@ -1,0 +1,5 @@
+@import '../../../variables/GridAreaVars.css';
+
+.top-left-container {
+  grid-area: var(--grid-top-left);
+}

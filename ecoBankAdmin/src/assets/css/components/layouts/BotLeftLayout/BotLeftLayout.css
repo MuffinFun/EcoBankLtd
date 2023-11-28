@@ -1,0 +1,12 @@
+@import '../../../variables/GridAreaVars.css';
+@import './BotLeftLayout-body.css';
+@import './BotLeftLayout-header.css';
+@import './BotLeftLayout-footer.css';
+
+.bot-left-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  grid-area: var(--grid-bot-left);
+  overflow: scroll;
+}
