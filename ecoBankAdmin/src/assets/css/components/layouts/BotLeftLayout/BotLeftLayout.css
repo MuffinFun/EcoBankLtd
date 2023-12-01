@@ -9,4 +9,5 @@
   justify-content: space-between;
   grid-area: var(--grid-bot-left);
   overflow: scroll;
+  cursor: default;
 }

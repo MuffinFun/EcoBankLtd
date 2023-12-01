@@ -1,5 +1,3 @@
-const express = require('express');
-
 const pool = require('../utils/db.js');
 
 class Cards {
@@ -11,6 +9,17 @@ class Cards {
       console.error(error);
     }
   };
+
+  getCardsInfo = async (id) => {
+    try {
+      const currentCards = await pool.query(
+        `select * from get_user_card_data_by_id(${id})`
+      );
+      return currentCards.rows;
+    } catch (error) {
+      console.error(error);
+    }
+  };
 }
 
-module.exports = UserPersonal;
+module.exports = Cards;

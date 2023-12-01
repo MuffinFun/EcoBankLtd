@@ -1,14 +1,12 @@
 import '../../../assets/css/components/layouts/BotRightLayout/BotRightLayout.css';
-import SetLayoutCurrentData from '../../setLayoutCurrentData/SetLayoutCurrentData';
+import SetLayoutCurrentData from '../../CurrentUserData/setLayoutCurrentData/SetLayoutCurrentData';
 
 const BotRightLayout = ({selectedUser}) => {
 
+
 	return (
 		<div className="bot-right-container container">
-			<SetLayoutCurrentData user={selectedUser}/>
-
-			<div>some precents придумаю еще</div>
-			<div>some precents придумаю еще</div>
+			{!selectedUser ? <p>choose user</p> : <SetLayoutCurrentData user={selectedUser}/>}
 		</div>
 	);
 };

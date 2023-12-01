@@ -8,7 +8,7 @@ const getAllUserPersonal = async (_, res) => {
 
     res.status(200).json(allUsers);
   } catch (err) {
-    console.error(err);
+    console.error(err.message);
   }
 };
 
@@ -21,5 +21,16 @@ const getCurrentUserInfo = async (_, res) => {
     console.error(err);
   }
 };
+const deleteCurrentUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
 
-module.exports = { getAllUserPersonal, getCurrentUserInfo };
+    const userForDelete = await users.deleteUser(userId);
+
+    res.status(200).json(`User was deleted`);
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+module.exports = { getAllUserPersonal, getCurrentUserInfo, deleteCurrentUser };

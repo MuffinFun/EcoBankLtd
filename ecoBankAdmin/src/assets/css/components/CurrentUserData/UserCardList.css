@@ -1,0 +1,16 @@
+.cards-list__item {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cards-list__item:last-child {
+  margin-bottom: 0;
+}
+
+.cards-list__bottom-block {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+}

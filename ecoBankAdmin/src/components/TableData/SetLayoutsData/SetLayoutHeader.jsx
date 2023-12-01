@@ -1,6 +1,6 @@
 const SetLayoutsHeader = () => {
 
-	const testStorage = {
+	const columnName = {
 		colOne:'ID',
 		colTwo:'NAME',
 		colThree:'SURNAME',
@@ -11,12 +11,12 @@ const SetLayoutsHeader = () => {
 
 	return (
 		<tr className='table-header__head-line'>
-			<td>{testStorage.colOne}</td>
-			<td>{testStorage.colTwo}</td>
-			<td>{testStorage.colThree}</td>
-			<td>{testStorage.colFour}</td>
-			<td>{testStorage.colFive}</td>
-			<td>{testStorage.colSix}</td>
+			<td>{columnName.colOne}</td>
+			<td>{columnName.colTwo}</td>
+			<td>{columnName.colThree}</td>
+			<td>{columnName.colFour}</td>
+			<td>{columnName.colFive}</td>
+			<td>{columnName.colSix}</td>
 		</tr>
 	);
 };

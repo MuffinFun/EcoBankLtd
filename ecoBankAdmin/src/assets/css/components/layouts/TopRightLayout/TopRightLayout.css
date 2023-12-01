@@ -1,5 +1,6 @@
 @import '../../../variables/GridAreaVars.css';
 
 .top-right-container {
-  grid-area: var(--grid-top-right);
+  display: flex;
+  justify-content: space-evenly;
 }

@@ -1,15 +1,26 @@
 const Cards = require('../models/cards.js');
 
-const users = new Cards();
+const cards = new Cards();
 
-const getCards = async (req, res) => {
+const allCards = async (_, res) => {
   try {
-    const cards = await users.getAllUsersPersonal();
+    const allCards = await cards.getCards();
 
-    res.status(200).json({ cards });
+    res.status(200).json(allCards);
+  } catch (err) {
+    console.error(err);
+  }
+};
+const currentCardsInfo = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const currentCards = await cards.getCardsInfo(userId);
+
+    res.status(200).json(currentCards);
   } catch (err) {
     console.error(err);
   }
 };
 
-module.exports = { cards };
+module.exports = { allCards, currentCardsInfo };

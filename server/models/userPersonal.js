@@ -1,5 +1,3 @@
-const express = require('express');
-
 const pool = require('../utils/db.js');
 
 class UserPersonal {
@@ -16,9 +14,20 @@ class UserPersonal {
   getCurrentUserInfo = async () => {
     try {
       const currentUser = await pool.query(
-        `select * from get_user_info_by_id()`
+        `select * from get_current_user_info()`
       );
       return currentUser.rows;
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+  deleteUser = async (id) => {
+    try {
+      const deletedUser = await pool.query(
+        'delete from usersaccounts where id_accounts=$1',
+        [id]
+      );
+      return deletedUser.rows;
     } catch (error) {
       console.error(error.message);
     }

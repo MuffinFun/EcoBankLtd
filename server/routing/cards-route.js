@@ -2,8 +2,12 @@ const express = require('express');
 
 const router = new express.Router();
 
-const { getCards } = require('../controllers/cards-controller.js');
+const {
+  allCards,
+  currentCardsInfo,
+} = require('../controllers/cards-controller.js');
 
-router.get('/user-personal', getAllUserPersonal);
+router.get('/user-cards', allCards);
+router.get('/user-cards/:userId', currentCardsInfo);
 
 module.exports = router;

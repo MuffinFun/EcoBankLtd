@@ -1,8 +1,7 @@
-import useFetch from '../../hooks/useFetch';
+import useFetch from '../../../hooks/useFetch';
 const SetLayoutsData = ({onSelectGetId, value, onSelectUser}) => {
-
-	const {value: userInfo } = useFetch('http://localhost:5000/api/v1/user-personal/current-user-info', {}, []);
-
+	
+	const {value: userInfo} = useFetch('http://localhost:5000/api/v1/user-personal/current-user-info', {}, []);
 
 	const getData = ()=>{
 		onSelectGetId(value.id_accounts);

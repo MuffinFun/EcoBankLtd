@@ -11,12 +11,17 @@ function App() {
 
 	const [currentUsertId, setCerrentUserId] = useState(null);
 	const [currentUserInfo, setCurrentUserInfo] = useState(null);
-	const {value: users} = useFetch('http://localhost:5000/api/v1/user-personal', {}, [currentUsertId]);
+	const [retry, setRetry] = useState(false);
+	const {value: users} = useFetch('http://localhost:5000/api/v1/user-personal', {}, [retry]);
+
+	const refresh = () =>{
+		setRetry(!retry);
+	};
 
 	return (
 		<>
 			<TopLeftLayout/>
-			<TopRightLayout selectedUser={currentUsertId}/>
+			<TopRightLayout selectedUser={currentUsertId} toRetry={refresh}/>
 			<BotLeftLayout  items={users} setLastId={setCerrentUserId} getUserInfo={setCurrentUserInfo}/>
 			<BotRightLayout selectedUser={currentUserInfo}/>
 		</>

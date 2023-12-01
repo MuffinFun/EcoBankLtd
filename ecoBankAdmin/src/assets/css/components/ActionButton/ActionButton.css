@@ -1,0 +1,11 @@
+.action-button {
+  border: none;
+  padding: 15px;
+  background-color: gray;
+  cursor: pointer;
+  transition: 245ms background-color;
+}
+
+.action-button:hover {
+  background-color: darkgray;
+}
