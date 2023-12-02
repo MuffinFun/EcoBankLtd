@@ -6,8 +6,8 @@
   grid-template-rows: 0.17fr 1fr;
   grid-column-gap: 30px;
   grid-row-gap: 50px;
+  position: relative;
 }
-
 body {
   margin: 0;
   font-family: sans-serif;
