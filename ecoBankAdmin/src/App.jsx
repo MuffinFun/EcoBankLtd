@@ -11,15 +11,15 @@ import { useState } from 'react';
 
 function App() {
 
-	const [currentUsertId, setCurrentUserId] = useState(null);
+	const [currentUserId, setCurrentUserId] = useState(null);
 	const [currentUserInfo, setCurrentUserInfo] = useState(null);
+	const [dataToUpdate, setDataToUpdate] = useState(null);
 
 	const [retry, setRetry] = useState(false);
 
 	const [hidden, setHidden] = useState(true);
 	
 	const {value: users} = useFetch('http://localhost:5000/api/v1/user-personal', {}, [retry]);
-
 
 	const refresh = () =>{
 		setRetry(!retry);
@@ -29,14 +29,18 @@ function App() {
 		setHidden(property);
 	};
 
+	const getData = (data)=> {
+		setDataToUpdate(data);
+	};
+
 	return (
 	<>
 		<TopLeftLayout/>
-		<TopRightLayout selectedUser={currentUsertId} toRetry={refresh} activateForm={activateForm}/>
+		<TopRightLayout selectedUser={currentUserId} toRetry={refresh} activateForm={activateForm}/>
 		<BotLeftLayout  items={users} setLastId={setCurrentUserId} getUserInfo={setCurrentUserInfo}/>
 		<BotRightLayout selectedUser={currentUserInfo}/>
-		<UpdateUserData  hidden={hidden} currentValues={users} selectedUser={currentUsertId} refresh={refresh}/>
-		<ConfirmWindow hidden={hidden}/>
+		<UpdateUserData  hidden={hidden} currentValues={users} selectedUser={currentUserId} refresh={refresh} getData={getData}/>
+		<ConfirmWindow dataToUpdate={dataToUpdate} selectId={currentUserId} users={users} refresh={refresh}/>
 	</>
 	);
 }

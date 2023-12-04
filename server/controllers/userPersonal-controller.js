@@ -32,5 +32,20 @@ const deleteCurrentUser = async (req, res) => {
     console.error(error.message);
   }
 };
+const updateCurrentUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { body } = req.body;
+    const updateUser = await users.updateUser(userId, ...body);
+    res.status(200).json('User was Updated!!!');
+  } catch (error) {
+    console.error(error.message);
+  }
+};
 
-module.exports = { getAllUserPersonal, getCurrentUserInfo, deleteCurrentUser };
+module.exports = {
+  getAllUserPersonal,
+  getCurrentUserInfo,
+  deleteCurrentUser,
+  updateCurrentUser,
+};

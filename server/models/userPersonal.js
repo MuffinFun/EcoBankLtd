@@ -4,7 +4,7 @@ class UserPersonal {
   getAllUsersPersonal = async () => {
     try {
       const allUsersPersonal = await pool.query(
-        'select ua.id_accounts, ua.username, ua.usersurname, ua.userlastname, ua.userage, ua.usersex from usersAccounts as ua'
+        'select ua.id_accounts, ua.username, ua.usersurname, ua.userlastname, ua.userage, ua.usersex from usersAccounts as ua order by id_accounts'
       );
       return allUsersPersonal.rows;
     } catch (error) {
@@ -28,6 +28,17 @@ class UserPersonal {
         [id]
       );
       return deletedUser.rows;
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+  updateUser = async (id, name, surname, lastname, age, sex) => {
+    try {
+      const deletedUser = await pool.query(
+        `call update_main_user_info($1,$2,$3,$4,$5,$6,null,null,null);`,
+        [id, name, surname, lastname, age, sex]
+      );
+      return deletedUser;
     } catch (error) {
       console.error(error.message);
     }

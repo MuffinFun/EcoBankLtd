@@ -5,7 +5,7 @@ import DeleteButton from '../../ActionButton/DeleteButton';
 const TopRightLayout = ({selectedUser, toRetry, activateForm}) => {
 	return (
 		<div className="top-right-container container"> 
-			<UpdateButton userId={selectedUser} toRetry={toRetry} activateForm={activateForm}/>
+			<UpdateButton userId={selectedUser} activateForm={activateForm}/>
 			<DeleteButton userId={selectedUser} toRetry={toRetry}/>
 		</div>
 	);
