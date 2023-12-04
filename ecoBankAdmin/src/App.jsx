@@ -35,7 +35,7 @@ function App() {
 
 	return (
 	<>
-		<TopLeftLayout/>
+		<TopLeftLayout />
 		<TopRightLayout selectedUser={currentUserId} toRetry={refresh} activateForm={activateForm}/>
 		<BotLeftLayout  items={users} setLastId={setCurrentUserId} getUserInfo={setCurrentUserInfo}/>
 		<BotRightLayout selectedUser={currentUserInfo}/>

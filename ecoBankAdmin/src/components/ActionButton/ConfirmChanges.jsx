@@ -6,7 +6,7 @@ const ConfirmChanges = ({selectedId, newData, users,refresh}) => {
         const data = Object.values(users.find(e=>e.id_accounts==selectedId)).slice(1);
 
         setCurrentUserMainInfo(data);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[selectedId]);
 
     const putUpdates = async(e)=>{

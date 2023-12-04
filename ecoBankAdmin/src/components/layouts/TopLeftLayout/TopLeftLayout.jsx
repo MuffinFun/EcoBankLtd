@@ -6,7 +6,8 @@ GetUsersButton;
 const TopLeftLayout = () => {
 
 	return (
-		<div className="top-left-container container">admin info and other
+		<div className="top-left-container container">
+			
 		</div>
 	);
 };
