@@ -1,11 +1,11 @@
-import SetInfoPart from '../SetPartsOfCurrData/SetInfoPart';
-import SetTransactionPart from '../SetPartsOfCurrData/SetTransactionPart';
-import SetWorkPart from '../SetPartsOfCurrData/SetWorkPart';
-import SetCardPart from '../SetPartsOfCurrData/SetCardPart';
+import SetInfoPart from '../SetPartsOfCurrUsersData/SetInfoPart';
+import SetTransactionPart from '../SetPartsOfCurrUsersData/SetTransactionPart';
+import SetWorkPart from '../SetPartsOfCurrUsersData/SetWorkPart';
+import SetCardPart from '../SetPartsOfCurrUsersData/SetCardPart';
 import useFetch from '../../../hooks/useFetch';
 
 
-const SetLayoutCurrentData = ({user}) => {
+const SetLayoutCurrentUserData = ({user}) => {
 
 	const {loading, value} = useFetch(`http://localhost:5000/api/v1/user-cards/${user.id_accounts}`,{},[user.id_accounts]);
 	return (
@@ -17,4 +17,4 @@ const SetLayoutCurrentData = ({user}) => {
 		</>
 	);
 };
-export default SetLayoutCurrentData;
+export default SetLayoutCurrentUserData;

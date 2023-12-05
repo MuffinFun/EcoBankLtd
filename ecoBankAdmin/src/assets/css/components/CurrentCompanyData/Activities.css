@@ -1,0 +1,14 @@
+.company-info__activities {
+	overflow: scroll;
+	width: 90%;
+	height: 20%;
+	border: 1px solid black;
+}
+
+.activities__item {
+	text-align: center;
+	margin-bottom: 10px;
+}
+.activities__item:last-child {
+	margin-bottom: 0;
+}

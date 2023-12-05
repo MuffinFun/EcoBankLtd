@@ -1,6 +1,7 @@
 @import '../../../variables/GridAreaVars.css';
 
 .bot-right-container {
-  grid-area: var(--grid-bot-right);
-  flex-direction: column;
+	grid-area: var(--grid-bot-right);
+	flex-direction: column;
+	justify-content: space-evenly;
 }

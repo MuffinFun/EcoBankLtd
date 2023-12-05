@@ -1,13 +1,12 @@
-import '../../../assets/css/components/layouts/BotRightLayout/BotRightLayout.css';
-import SetLayoutCurrentData from '../../CurrentUserData/setLayoutCurrentData/SetLayoutCurrentData';
+import UsersDataComponent from '../../BotRightData/UsersDataComponent';
+import CompanyDataComponent from '../../BotRightData/CompanyDataCOmponent';
 
-const BotRightLayout = ({selectedUser}) => {
-
+const BotRightLayout = ({selectedData, checkData}) => {
 
 	return (
-		<div className="bot-right-container container">
-			{!selectedUser ? <p>choose user</p> : <SetLayoutCurrentData user={selectedUser}/>}
-		</div>
+		<>
+			{checkData ? <UsersDataComponent usersData={selectedData}/>:<CompanyDataComponent companyData={selectedData}/>}
+		</>
 	);
 };
 export default BotRightLayout;

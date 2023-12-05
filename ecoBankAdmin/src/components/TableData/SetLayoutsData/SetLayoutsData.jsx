@@ -1,22 +1,32 @@
+import '../../../assets/css/animations/hoverTR.css';
 import useFetch from '../../../hooks/useFetch';
-const SetLayoutsData = ({onSelectGetId, value, onSelectUser}) => {
-	
-	const {value: userInfo} = useFetch('http://localhost:5000/api/v1/user-personal/current-user-info', {}, []);
 
-	const getData = ()=>{
-		onSelectGetId(value.id_accounts);
-		const info = userInfo.find(e => e.id_accounts == value.id_accounts);
-		onSelectUser(info);
+const SetLayoutsData = ({onSelectGetId, value, onSelectData,id,currentDataURL, checkWhatData}) => {
+	
+	const {value: currentData} = useFetch(currentDataURL, {}, []);
+
+	const getData = (e)=>{
+		e.preventDefault();
+		onSelectGetId(value.id_accounts || value.id_commcompany);
+		
+		if(checkWhatData){
+			const info = currentData.find(e => e.id_accounts == value.id_accounts);
+			onSelectData(info);
+		}else{
+			const info = currentData.filter(e => e.id_commcompany == value.id_commcompany);
+			onSelectData(info);
+		}
 	};
 
 	return (
-		<tr onClick={getData} className='table-body__body-line'>
-			<td>{value.id_accounts}</td>
-			<td>{value.username}</td>
-			<td>{value.usersurname}</td>
-			<td>{value.userlastname}</td>
-			<td>{value.userage}</td>
-			<td>{value.usersex}</td>
+		<tr onClick={e=>getData(e)}>
+			<td>{id+1}</td>
+			<td>{value.id_accounts || value.id_commcompany}</td>
+			<td>{value.username || value.companyname}</td>
+			<td>{value.usersurname || value.companyphonenumber}</td>
+			<td>{value.userlastname || value.companyemail}</td>
+			<td>{value.userage || value.companyadress}</td>
+			<td>{value.usersex || value.countofbuildings}</td>
 		</tr>
 	);
 };

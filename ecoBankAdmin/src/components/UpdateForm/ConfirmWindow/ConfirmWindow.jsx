@@ -7,12 +7,6 @@ const ConfirmWindow = ({dataToUpdate, selectId, users, refresh})=>{
     if(!dataToUpdate) return; 
     const selectedData = Object.values(dataToUpdate);
 
-    const test=()=>{
-        const str = 'aaaa';
-        console.log(Number.isInteger(str));
-    };
-
-
     return (
         <div className='confirm'>
             <div className="confirm__text-block">
@@ -22,7 +16,7 @@ const ConfirmWindow = ({dataToUpdate, selectId, users, refresh})=>{
         </div>
             <div className="confirm__button-block">
                 <ConfirmChanges selectedId={selectId} newData={selectedData} users={users} refresh={refresh}/>
-                <button onClick={()=>test()}>NO</button>
+                <button>NO</button>
             </div>
         </div>
     );

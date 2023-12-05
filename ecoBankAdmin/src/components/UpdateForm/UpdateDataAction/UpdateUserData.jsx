@@ -18,7 +18,6 @@ const UpdateUserData = ({ hidden, currentValues , selectedUser, getData}) => {
         e.preventDefault();
         const age =  +e.target[3].value >= 18 ? +e.target[3].value : null;
         const checkedData = checkString(e.target[0].value,e.target[1].value,e.target[2].value,e.target[4].value);
-        console.log(checkedData.map((e,i)=> console.log(e,i)));
         setNewData({
             newName: checkedData[0],
             newSurName: checkedData[1],

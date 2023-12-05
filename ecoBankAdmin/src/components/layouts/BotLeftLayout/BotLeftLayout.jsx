@@ -1,26 +1,24 @@
 import '../../../assets/css/components/layouts/BotLeftLayout/BotLeftLayout.css';
+import '../../../assets/css/components/Table/Table.css';
 import SetLayoutsData from '../../TableData/SetLayoutsData/SetLayoutsData';
 import SetLayoutsHeader from '../../TableData/SetLayoutsData/SetLayoutHeader';
 
-const BotLeftLayout = ({ items,setLastId, getUserInfo}) => {
-	
-	return (
-		<table className="bot-left-container container">
+const BotLeftLayout = ({ values, setLastId, getDataInfo, checkColumnNames, dataURL, checkWhatData}) => {
 
-			<thead className='table-header'>
-				<SetLayoutsHeader/>
+	return (
+		<div className="bot-left-container container">
+
+		<table >
+
+			<thead >
+				<SetLayoutsHeader check={checkColumnNames}/>
 			</thead>
 			
-			<tbody className='table-body'>
-				{items?.length > 0 ?items.map(e => <SetLayoutsData onSelectGetId={setLastId} onSelectUser={getUserInfo} key={e.id_accounts} value={e}/>):<></>}
+			<tbody>
+				{values?.length > 0 ? values.map((e,i) => <SetLayoutsData checkWhatData={checkWhatData} currentDataURL={dataURL} onSelectGetId={setLastId} onSelectData={getDataInfo} key={i + 1} value={e} id={i}/>):<></>}
 			</tbody>
-
-			<tfoot className='table-footer'>
-				<tr>
-					<td>konec</td>
-				</tr>
-			</tfoot>
 		</table>
+		</div>
 	);
 };
 export default BotLeftLayout;

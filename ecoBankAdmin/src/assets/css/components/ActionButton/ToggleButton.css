@@ -1,0 +1,14 @@
+.toggle-button {
+	width: 70%;
+	height: 50%;
+	background-color: aquamarine;
+	border: 0.5px solid black;
+	cursor: pointer;
+	transition: background-color 235ms;
+	text-transform: uppercase;
+	font-family: sans-serif;
+}
+
+.toggle-button:hover {
+	background-color: rgb(92, 195, 161);
+}

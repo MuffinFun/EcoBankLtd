@@ -11,38 +11,99 @@ import { useState } from 'react';
 
 function App() {
 
-	const [currentUserId, setCurrentUserId] = useState(null);
-	const [currentUserInfo, setCurrentUserInfo] = useState(null);
-	const [dataToUpdate, setDataToUpdate] = useState(null);
+    //DATA
 
-	const [retry, setRetry] = useState(false);
+    const [currentDataId, setCurrenDataId] = useState(null);
+    const [currentDataInfo, setCurrentDataInfo] = useState(null);
+    const [dataToUpdate, setDataToUpdate] = useState(null);
 
-	const [hidden, setHidden] = useState(true);
-	
-	const {value: users} = useFetch('http://localhost:5000/api/v1/user-personal', {}, [retry]);
+    //URL
 
-	const refresh = () =>{
-		setRetry(!retry);
-	};
+    const [dataAbout, setDataAbout] = useState('http://localhost:5000/api/v1/user-personal');
+    const [currentDataAbout, setCurrentDataAbout] = useState('http://localhost:5000/api/v1/user-personal/current-user-info');
 
-	const activateForm = (property) => {
-		setHidden(property);
-	};
+    //CHECKING
 
-	const getData = (data)=> {
-		setDataToUpdate(data);
-	};
+    const [checkWhatDataAbout, setCheckWhatDataAbout] = useState(false);
+    const [checkColumnsName, setCheckColumnsName] = useState(true);
+    
+    //UTILS
+    
+    const [retry, setRetry] = useState(false);
+    
+    const [hidden, setHidden] = useState(true);
+    
+    //GET DATA
 
-	return (
-	<>
-		<TopLeftLayout />
-		<TopRightLayout selectedUser={currentUserId} toRetry={refresh} activateForm={activateForm}/>
-		<BotLeftLayout  items={users} setLastId={setCurrentUserId} getUserInfo={setCurrentUserInfo}/>
-		<BotRightLayout selectedUser={currentUserInfo}/>
-		<UpdateUserData  hidden={hidden} currentValues={users} selectedUser={currentUserId} refresh={refresh} getData={getData}/>
-		<ConfirmWindow dataToUpdate={dataToUpdate} selectId={currentUserId} users={users} refresh={refresh}/>
-	</>
-	);
+    const { value } = useFetch(dataAbout, {}, [retry,dataAbout]);
+
+    //UTILS FUNC
+
+    const refresh = () => {
+        setRetry(!retry);
+    };
+
+    const activateForm = (property) => {
+        setHidden(property);
+    };
+
+    const getData = (data) => {
+        setDataToUpdate(data);
+    };
+
+    const clearCurrentData = () =>{
+        setCurrentDataInfo(null);
+    };
+
+    //CHECK WHAT DATA 
+
+    const switchCheck = () =>{
+        setCheckWhatDataAbout(!checkWhatDataAbout);
+    };
+
+    //SWITCH DATA
+
+    const switchDataAbout = (propertyDataAbout) =>{
+        setDataAbout(propertyDataAbout);
+    };
+    const switchCurrentDataAbout = (propertyCurrDataAbout) => {
+        setCurrentDataAbout(propertyCurrDataAbout);
+    };
+    const toggleColumnsName = (property) =>{
+        setCheckColumnsName(property);
+    };
+
+    return (
+        <>
+            <TopLeftLayout clearCurrentData={clearCurrentData} checking={switchCheck} toggleColumnsName={toggleColumnsName} switchData={switchDataAbout} switchCurrData={switchCurrentDataAbout}/>
+            <TopRightLayout
+                selectedUser={currentDataId}
+                toRetry={refresh}
+                activateForm={activateForm}
+            />
+            <BotLeftLayout
+                values={value}
+                checkColumnNames={checkColumnsName}
+                checkWhatData={checkWhatDataAbout}
+                setLastId={setCurrenDataId}
+                getDataInfo={setCurrentDataInfo}
+                dataURL={currentDataAbout}
+            />
+            <BotRightLayout selectedData={currentDataInfo} checkData={checkWhatDataAbout}/>         
+            <UpdateUserData
+                hidden={hidden}
+                currentValues={value}
+                selectedUser={currentDataId}
+                getData={getData}
+            />
+            <ConfirmWindow
+                dataToUpdate={dataToUpdate}
+                selectId={currentDataId}
+                users={value}
+                refresh={refresh}
+            />
+        </>
+    );
 }
 
 export default App;
