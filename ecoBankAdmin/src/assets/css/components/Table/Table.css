@@ -11,7 +11,7 @@ thead {
 }
 
 th {
-	width: 180px;
+	width: 210px;
 	background-color: rgb(225, 216, 205);
 	border: 1px solid black;
 	text-align: center;
@@ -20,7 +20,7 @@ th {
 }
 th:nth-child(1) {
 	padding: 0;
-	width: 25px;
+	width: 35px;
 }
 th:nth-child(2) {
 	padding: 0;
@@ -36,6 +36,9 @@ td {
 
 td:nth-child(1) {
 	background-color: rgb(183, 183, 183);
+}
+td:nth-child(6) {
+	text-align: center;
 }
 
 td:last-child {

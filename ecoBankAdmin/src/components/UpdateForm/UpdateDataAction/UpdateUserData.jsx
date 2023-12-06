@@ -2,13 +2,13 @@ import '../../../assets/css/components/Actions/UpdateDataAction/UpdateUserData.c
 import UpdateFormInputs from '../UpdateFormInputs/UpdateFormInputs';
 import { useEffect, useState} from 'react';
 
-const UpdateUserData = ({ hidden, currentValues , selectedUser, getData}) => {
+const UpdateUserData = ({ hidden, currentData , selectedId, getData, checkWhatData}) => {
     
     const [newData, setNewData] = useState(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(()=> getData(newData),[newData]);
 
-    if(!currentValues) return;
+    if(!currentData) return;
 
     const hideForm = hidden ? 'hidden' : '';
 
@@ -16,15 +16,17 @@ const UpdateUserData = ({ hidden, currentValues , selectedUser, getData}) => {
 
     const onSubmit = (e)=>{
         e.preventDefault();
-        const age =  +e.target[3].value >= 18 ? +e.target[3].value : null;
-        const checkedData = checkString(e.target[0].value,e.target[1].value,e.target[2].value,e.target[4].value);
-        setNewData({
-            newName: checkedData[0],
-            newSurName: checkedData[1],
-            newLastName: checkedData[2],
-            newAge: age,
-            newSex: checkedData[3],
-        });
+        if(checkWhatData){
+            const age =  +e.target[3].value >= 18 ? +e.target[3].value : null;
+            const checkedData = checkString(e.target[0].value, e.target[1].value, e.target[2].value, e.target[4].value);
+            setNewData([checkedData[0], checkedData[1], checkedData[2], age, checkedData[3]]);
+        }else{
+            const buildings = +e.target[4].value > 0 ? +e.target[4].value : null;
+            const temp = isNaN(e.target[2].value) ? null : e.target[2].value;
+            const phoneNumber = temp ? '+'+ temp : null;
+            const checkedData = checkString(e.target[0].value, e.target[1].value, e.target[3].value);
+            setNewData([checkedData[1], phoneNumber, checkedData[0], checkedData[2], buildings]);
+        }
         
     };
 
@@ -37,7 +39,7 @@ const UpdateUserData = ({ hidden, currentValues , selectedUser, getData}) => {
         onSubmit={(e)=>onSubmit(e)}
         onKeyDown={e=>checkEnter(e)}
         >    
-            <UpdateFormInputs currVal={currentValues} userId={selectedUser}/>
+            <UpdateFormInputs data={currentData} selectedId={selectedId} check={checkWhatData}/>
             <button className='update-form__submit-button' type='submit'>to confirm</button>
         </form>
     );

@@ -7,7 +7,7 @@ import UpdateUserData from './components/UpdateForm/UpdateDataAction/UpdateUserD
 import ConfirmWindow from './components/UpdateForm/ConfirmWindow/ConfirmWindow';
 
 import useFetch from './hooks/useFetch';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
 
@@ -16,26 +16,36 @@ function App() {
     const [currentDataId, setCurrenDataId] = useState(null);
     const [currentDataInfo, setCurrentDataInfo] = useState(null);
     const [dataToUpdate, setDataToUpdate] = useState(null);
+    const [dataToDelete, setDataToDelete] = useState(null);
 
     //URL
 
     const [dataAbout, setDataAbout] = useState('http://localhost:5000/api/v1/user-personal');
-    const [currentDataAbout, setCurrentDataAbout] = useState('http://localhost:5000/api/v1/user-personal/current-user-info');
+    const [currentDataURL, setCurrentDataURL] = useState('http://localhost:5000/api/v1/user-personal/current-user-info');
 
     //CHECKING
 
     const [checkWhatDataAbout, setCheckWhatDataAbout] = useState(false);
     const [checkColumnsName, setCheckColumnsName] = useState(true);
-    
+    const [isAction, setIsAction] = useState(null);
+
     //UTILS
     
     const [retry, setRetry] = useState(false);
     
-    const [hidden, setHidden] = useState(true);
+    const [hiddenConfirm, setHiddenConfirm] = useState(true);
+    const [hiddenForm, setHiddenForm] = useState(true);
     
     //GET DATA
 
     const { value } = useFetch(dataAbout, {}, [retry,dataAbout]);
+
+    useEffect(()=>{
+        if(!currentDataId) return;
+        const data = value.find(item => item.id_accounts == currentDataId || item.id_commcompany == currentDataId);
+        setDataToDelete(data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[currentDataId]);
 
     //UTILS FUNC
 
@@ -43,11 +53,20 @@ function App() {
         setRetry(!retry);
     };
 
-    const activateForm = (property) => {
-        setHidden(property);
+    const activateConfirmWindow = () => {
+        setHiddenConfirm(!hiddenConfirm);
+    };
+    const activateUpdateForm = () => {
+        setHiddenForm(!hiddenForm);
+    };
+    
+    const setAction = (action) =>{
+        setIsAction(action);
     };
 
-    const getData = (data) => {
+    //DATA ACTIONS
+
+    const getDataToUpdate = (data) => {
         setDataToUpdate(data);
     };
 
@@ -66,8 +85,8 @@ function App() {
     const switchDataAbout = (propertyDataAbout) =>{
         setDataAbout(propertyDataAbout);
     };
-    const switchCurrentDataAbout = (propertyCurrDataAbout) => {
-        setCurrentDataAbout(propertyCurrDataAbout);
+    const switchcurrentDataURL = (propertyCurrDataAbout) => {
+        setCurrentDataURL(propertyCurrDataAbout);
     };
     const toggleColumnsName = (property) =>{
         setCheckColumnsName(property);
@@ -75,32 +94,42 @@ function App() {
 
     return (
         <>
-            <TopLeftLayout clearCurrentData={clearCurrentData} checking={switchCheck} toggleColumnsName={toggleColumnsName} switchData={switchDataAbout} switchCurrData={switchCurrentDataAbout}/>
+            <TopLeftLayout clearCurrentData={clearCurrentData} checking={switchCheck} toggleColumnsName={toggleColumnsName} switchData={switchDataAbout} switchCurrData={switchcurrentDataURL}/>
             <TopRightLayout
-                selectedUser={currentDataId}
+                selectedId={currentDataId}
+                data={currentDataInfo}
+                setAction={setAction}
+                activateConfirm={activateConfirmWindow}
+                activateForm={activateUpdateForm}
                 toRetry={refresh}
-                activateForm={activateForm}
             />
             <BotLeftLayout
                 values={value}
                 checkColumnNames={checkColumnsName}
                 checkWhatData={checkWhatDataAbout}
+                dataURL={currentDataURL}
                 setLastId={setCurrenDataId}
                 getDataInfo={setCurrentDataInfo}
-                dataURL={currentDataAbout}
             />
             <BotRightLayout selectedData={currentDataInfo} checkData={checkWhatDataAbout}/>         
             <UpdateUserData
-                hidden={hidden}
-                currentValues={value}
-                selectedUser={currentDataId}
-                getData={getData}
+                hidden={hiddenForm}
+                currentData={value}
+                selectedId={currentDataId}
+                checkWhatData={checkWhatDataAbout}
+                getData={getDataToUpdate}
+                activateConfirm={activateConfirmWindow}
             />
             <ConfirmWindow
                 dataToUpdate={dataToUpdate}
+                dataToDelete={dataToDelete}
                 selectId={currentDataId}
                 users={value}
+                action={isAction}
+                hidden={hiddenConfirm}
+                checkData={checkWhatDataAbout}
                 refresh={refresh}
+                activateConfirm={activateConfirmWindow}
             />
         </>
     );

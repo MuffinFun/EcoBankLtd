@@ -1,6 +1,6 @@
 import SelectedDataItem from './SelectedDataitem';
 
-const DataToUpdate = ({data}) =>{
+const SelectedData = ({data}) =>{
     
     if(!data) return;
 
@@ -11,4 +11,4 @@ const DataToUpdate = ({data}) =>{
     );
 };
 
-export default DataToUpdate;
+export default SelectedData;

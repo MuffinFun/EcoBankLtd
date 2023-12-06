@@ -1,7 +1,7 @@
 const SelectedDataItem = ({item}) => {
 
     return(
-        <span>{item} </span>
+        <span>-{item}-</span>
     );
 };
 

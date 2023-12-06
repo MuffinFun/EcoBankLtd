@@ -34,11 +34,11 @@ class UserPersonal {
   };
   updateUser = async (id, name, surname, lastname, age, sex) => {
     try {
-      const deletedUser = await pool.query(
+      const updatedUser = await pool.query(
         `call update_main_user_info($1,$2,$3,$4,$5,$6,null,null,null);`,
         [id, name, surname, lastname, age, sex]
       );
-      return deletedUser;
+      return updatedUser;
     } catch (error) {
       console.error(error.message);
     }
